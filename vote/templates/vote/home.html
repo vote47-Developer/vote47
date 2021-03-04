@@ -1,0 +1,29 @@
+{% extends 'vote/base.html' %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/global.css' %}" />
+<link rel="stylesheet" href="{% static 'css/nav.css' %}" />
+<link rel="stylesheet" href="{% static 'css/start-page.css' %}" />
+<link rel="stylesheet" href="{% static 'css/quiz-page.css' %}" />
+<link rel="stylesheet" href="{% static 'css/result-page.css' %}" />
+{% endblock %}
+
+{% block script %}
+<script defer src="{% static 'javascript/components/Quiz.js' %}"></script>
+<script defer src="{% static 'javascript/components/Result.js' %}"></script>
+<script defer src="{% static 'javascript/pages/StartPage.js' %}"></script>
+<script defer src="{% static 'javascript/pages/QuizPage.js' %}"></script>
+<script defer src="{% static 'javascript/pages/ResultPage.js' %}"></script>
+<script defer src="{% static 'javascript/index.js' %}"></script>
+{% endblock %}
+
+{% block main %}
+<main id="app"></main>
+
+<script>
+function getQuizListUrl() {
+    return '{% url "vote:get_quiz_list" %}'
+}
+</script>
+{%endblock%}

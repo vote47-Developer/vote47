@@ -57,3 +57,19 @@ class Choice(models.Model):
         max_length=100, verbose_name='선택지4번', null=True)
     choice5 = models.CharField(
         max_length=100, verbose_name='선택지5번', null=True)
+
+class Quiz(models.Model):
+    question = models.TextField()
+
+    def __str__(self):
+        return self.question
+
+
+class Example(models.Model):
+    quiz = models.ForeignKey(
+        Quiz, on_delete=models.CASCADE, related_name="examples")
+    title = models.TextField()
+    is_answer = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.title
