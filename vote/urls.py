@@ -1,11 +1,12 @@
 from django.contrib import admin
 from django.urls import path, include
-from . import views
+from vote import views
 
 app_name = 'vote'
 
 urlpatterns = [
-    # path('', views.start, name='start'),  # 시작 화면)
-    # path('question/', views.question, name='questions'),  # 질문 화면)
-    # path('result/', views.result, name='result'),  # 결과 화면)
+    path('', views.home, name='home'),
+    path('vote', views.home, name='vote'),
+    path('result', views.home, name='result'),
+    path('api/get/quiz-list', views.get_quiz_list, name='get_quiz_list')
 ]
