@@ -8,5 +8,6 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('vote', views.home, name='vote'),
     path('result', views.home, name='result'),
-    path('api/get/quiz-list', views.get_quiz_list, name='get_quiz_list')
+    path('api/get/quiz-list', views.get_quiz_list, name='get_quiz_list'),
+    path("vote/user_info", views.user_info, name="user_info"),
 ]

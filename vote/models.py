@@ -58,6 +58,7 @@ class Choice(models.Model):
     choice5 = models.CharField(
         max_length=100, verbose_name='선택지5번', null=True)
 
+
 class Quiz(models.Model):
     question = models.TextField()
 

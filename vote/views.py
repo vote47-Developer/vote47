@@ -3,10 +3,12 @@ import json
 from django.http import HttpResponse
 from django.shortcuts import render
 from vote.models import *
+from .forms import UserForm
 
 
 def home(request):
     return render(request, 'vote/home.html')
+
 
 def get_quiz_list(request):
     quizs = Quiz.objects.prefetch_related('examples').all()
@@ -24,3 +26,13 @@ def get_quiz_list(request):
     }
 
     return HttpResponse(json.dumps(context), content_type="application/json")
+
+
+# user 정보
+def user_info(request):
+    if request.method == "GET":
+        form = UserForm()
+        ctx = {
+            "form": form,
+        }
+        return render(request, "vote/user_info.html", ctx)
