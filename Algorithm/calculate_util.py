@@ -22,7 +22,8 @@ point_set = [
      [0, 0, 2]]
 ]
 
-#TODO 3자대결에 정책적으로 겹쳐서 한 문항에 대해 여러 후보한테 점수를 줘야한다든지 할 수도...
+# TODO 3자대결에 정책적으로 겹쳐서 한 문항에 대해 여러 후보한테 점수를 줘야한다든지 할 수도...
+# 함수의 input인 response_list는 (질문의 수) 크기의 1D list. candidate_num은 후보의 수
 def calculate(response_list, candidate_num = 3):
     idx = 0
     result = np.zeros((candidate_num))
