@@ -23,7 +23,6 @@ function Router() {
 				this.route('quiz')
 				return
 			}
-
 			resultPage.init(resultList)
 			app.innerHTML = ''
 			app.appendChild(resultPage.target)

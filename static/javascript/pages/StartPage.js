@@ -7,11 +7,10 @@ function StartPage() {
 	this.setElements = () => {
 		this.template = /*html*/ `
       <div id="start-page">
-        <h1 class="title">🎊 Welcome To JavaScript Test ✍️</h1>
+        <h1 class="title">🎊 Welcome To Vote47</h1>
         <button class="start-btn">START</button>
       </div>
     `
-
 		this.target = document.createElement('div')
 		this.target.innerHTML = this.template
 		this.target = this.target.firstElementChild
