@@ -30,6 +30,19 @@ def get_quiz_list(request):
 
 # user 정보
 def user_info(request):
+    if request.method == "POST":
+        form = UserForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return render(request, "vote/test.html")
+        else:
+            print(request.POST)
+            print(form.errors)  # model에서 result 필드가 null 가능해야함
+            ctx = {
+                "form": form,
+            }
+            return render(request, "vote/user_info.html", ctx)
     if request.method == "GET":
         form = UserForm()
         ctx = {
