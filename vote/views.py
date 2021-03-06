@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from vote.models import *
 from .forms import UserForm
+from .models import User, Result
 
 
 def home(request):
@@ -32,13 +33,13 @@ def get_quiz_list(request):
 def user_info(request):
     if request.method == "POST":
         form = UserForm(request.POST)
-
         if form.is_valid():
-            form.save()
+            user = form.save()
+            result = Result.objects.create()
+            user.result = result
+            user.save()
             return render(request, "vote/test.html")
         else:
-            print(request.POST)
-            print(form.errors)  # model에서 result 필드가 null 가능해야함
             ctx = {
                 "form": form,
             }

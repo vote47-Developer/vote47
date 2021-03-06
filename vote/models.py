@@ -3,27 +3,42 @@ from django.contrib.auth.models import AbstractUser
 
 
 class Result(models.Model):
-    candidate = models.CharField(max_length=100, verbose_name='후보자이름')
-    q1 = models.PositiveIntegerField(verbose_name='1번 질문의 답')
-    q2 = models.PositiveIntegerField(verbose_name='2번 질문의 답')
-    q3 = models.PositiveIntegerField(verbose_name='3번 질문의 답')
-    q4 = models.PositiveIntegerField(verbose_name='4번 질문의 답')
-    q5 = models.PositiveIntegerField(verbose_name='5번 질문의 답')
-    q6 = models.PositiveIntegerField(verbose_name='6번 질문의 답')
-    q7 = models.PositiveIntegerField(verbose_name='7번 질문의 답')
-    q8 = models.PositiveIntegerField(verbose_name='8번 질문의 답')
-    q9 = models.PositiveIntegerField(verbose_name='9번 질문의 답')
-    q10 = models.PositiveIntegerField(verbose_name='10번 질문의 답')
-    q11 = models.PositiveIntegerField(verbose_name='11번 질문의 답')
-    q12 = models.PositiveIntegerField(verbose_name='12번 질문의 답')
-    q13 = models.PositiveIntegerField(verbose_name='13번 질문의 답')
+    candidate = models.CharField(
+        max_length=100, verbose_name='후보자이름', blank=True, null=True)
+    q1 = models.PositiveIntegerField(
+        verbose_name='1번 질문의 답', blank=True, null=True)
+    q2 = models.PositiveIntegerField(
+        verbose_name='2번 질문의 답', blank=True, null=True)
+    q3 = models.PositiveIntegerField(
+        verbose_name='3번 질문의 답', blank=True, null=True)
+    q4 = models.PositiveIntegerField(
+        verbose_name='4번 질문의 답', blank=True, null=True)
+    q5 = models.PositiveIntegerField(
+        verbose_name='5번 질문의 답', blank=True, null=True)
+    q6 = models.PositiveIntegerField(
+        verbose_name='6번 질문의 답', blank=True, null=True)
+    q7 = models.PositiveIntegerField(
+        verbose_name='7번 질문의 답', blank=True, null=True)
+    q8 = models.PositiveIntegerField(
+        verbose_name='8번 질문의 답', blank=True, null=True)
+    q9 = models.PositiveIntegerField(
+        verbose_name='9번 질문의 답', blank=True, null=True)
+    q10 = models.PositiveIntegerField(
+        verbose_name='10번 질문의 답', blank=True, null=True)
+    q11 = models.PositiveIntegerField(
+        verbose_name='11번 질문의 답', blank=True, null=True)
+    q12 = models.PositiveIntegerField(
+        verbose_name='12번 질문의 답', blank=True, null=True)
+    q13 = models.PositiveIntegerField(
+        verbose_name='13번 질문의 답', blank=True, null=True)
 
 
 class User(models.Model):
     nickname = models.CharField(max_length=100, verbose_name="닉네임")
     age = models.PositiveIntegerField(verbose_name='나이')
     job = models.CharField(max_length=100, verbose_name='직업')
-    result = models.OneToOneField(Result, on_delete=models.CASCADE)
+    result = models.OneToOneField(
+        Result, on_delete=models.CASCADE, blank=True, null=True)
     TYPE_OF_GENDER = (
         ('male', '남성'),
         ('female', '여성'),
