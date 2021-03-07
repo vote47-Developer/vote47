@@ -8,4 +8,6 @@ urlpatterns = [
     # path('', views.start, name='start'),  # 시작 화면)
     # path('question/', views.question, name='questions'),  # 질문 화면)
     # path('result/', views.result, name='result'),  # 결과 화면)
+    path('test/', views.test, name='test'),
+    path('test/plus/', views.test_plus, name='test-plus')
 ]

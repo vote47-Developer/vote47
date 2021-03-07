@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            .none {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        hihi
+        <div class="num">{{i}}</div>
+        <div class="num1 none">now you see this</div>
+        <button onclick="onClickPlus()">{%csrf_token%}plus</button>
+
+        <script>
+            const request = new XMLHttpRequest();
+
+            const onClickPlus = () => {
+                const url = "/test/plus/";
+                let numdiv = document.querySelector(".num").innerText;
+                console.log(numdiv);
+                request.open("POST", url, true);
+                request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                request.send(JSON.stringify({ numdiv }));
+            };
+
+            const handleResponse = () => {
+                if (request.status <= 400) {
+                    const { numjson } = JSON.parse(request.response);
+                    const numdiv = document.querySelector(".num");
+                    const numdivone = document.querySelector(".num1");
+                    const num = numdiv.innerText;
+                    const count = Number(num) + 1;
+                    numdiv.innerText = count;
+                    numdiv.classList.add("none");
+                    numdivone.classList.remove("none");
+                }
+            };
+
+            request.onreadystatechange = () => {
+                if (request.readyState === XMLHttpRequest.DONE) {
+                    handleResponse();
+                }
+            };
+        </script>
+    </body>
+</html>
