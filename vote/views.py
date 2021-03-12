@@ -1,10 +1,10 @@
 import json
 
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from vote.models import *
 from .forms import UserForm
-from .models import User, Result
+from .models import User, Candidate
 
 
 def home(request):
@@ -35,10 +35,11 @@ def user_info(request):
         form = UserForm(request.POST)
         if form.is_valid():
             user = form.save()
-            result = Result.objects.create()
-            user.result = result
-            user.save()
-            return render(request, "vote/test.html")
+            # result = Result.objects.create()
+            # user.result = result
+            # user.save()
+            # return render(request, "vote/test.html")
+            return redirect("vote:home")
         else:
             ctx = {
                 "form": form,
