@@ -38,6 +38,7 @@ function Quiz(parent, props) {
 
 	this.clickEventListener = (e) => {
 		const closestExampleElem = e.target.closest('.example')
+		
 		if (closestExampleElem) {
 			this.selectAnswer(e, closestExampleElem)
 		}
@@ -51,12 +52,30 @@ function Quiz(parent, props) {
 			example.style.transform = `translateY(16px) scale(0.75)`
 			example.style.opacity = 0
 		})
-
 		exampleElem.classList.add('active')
+		this.saveAnswer(exampleElem)
 		parent.selectAnswer({
 			quizId: this.id,
 			answerIndex: +exampleElem.dataset.index,
 		})
+	}
+	// 추가한 코드
+	this.saveAnswer = (exampleElem) => {
+		let postId = +exampleElem.dataset.index+1;
+		let url = 'answer';
+		axios.post(url, {
+			postId: postId
+		})
+				.then(
+					(response) => {
+						console.log(response.data);
+					}
+				)
+		// try {
+			
+		// } catch (error) {
+		// 	console.log(error);
+		// }
 	}
 
 	this.hide = () => {
@@ -70,6 +89,6 @@ function Quiz(parent, props) {
 			this.target.style.opacity = 1
 		}, 0)
 	}
-
 	this.init()
 } 
+
