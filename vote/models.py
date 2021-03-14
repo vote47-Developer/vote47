@@ -66,4 +66,4 @@ class Enrollment(models.Model):
         Example, on_delete=models.CASCADE, related_name="enrollments", verbose_name="선택한 선택지")
 
     def __str__(self):
-        return self.num
+        return str(self.num)

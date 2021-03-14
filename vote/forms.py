@@ -8,8 +8,3 @@ class UserForm(forms.ModelForm):
         model = User
         # fields = "__all__"
         fields = ["nickname", "age", "job", "result", "gender"]
-
-class EnrollmentForm(forms.ModelForm):
-    class Meta:
-        model = Enrollment
-        fields = "__all__"
