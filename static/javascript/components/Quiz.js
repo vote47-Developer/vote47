@@ -60,6 +60,7 @@ function Quiz(parent, props) {
 		})
 	}
 	// 추가한 코드
+	//todo 문항번호 같이 넘기기
 	this.saveAnswer = (exampleElem) => {
 		let postId = +exampleElem.dataset.index+1;
 		let url = 'answer';

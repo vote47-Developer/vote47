@@ -28,32 +28,6 @@ def get_quiz_list(request):
 
     return HttpResponse(json.dumps(context), content_type="application/json")
     
-
-@csrf_exempt
-def save_answer(request):
-    if request.method == "POST":
-        req = json.loads(request.body)
-        print(req)
-        form = EnrollmentForm(request.POST)
-        if form.is_valid():
-            enrollment = form.save()
-            # result = Result.objects.create()
-            # user.result = result
-            # user.save()
-            # return render(request, "vote/test.html")
-            return redirect("vote:home")
-        else:
-            ctx = {
-                "form": form,
-            }
-            return render(request, "vote/user_info.html", ctx)
-    if request.method == "GET":
-        form = EnrollmentForm()
-        ctx = {
-            "form": form,
-        }
-        return render(request, "vote/user_info.html", ctx)
-    
 # user 정보
 def user_info(request):
     if request.method == "POST":
@@ -72,6 +46,35 @@ def user_info(request):
             return render(request, "vote/user_info.html", ctx)
     if request.method == "GET":
         form = UserForm()
+        ctx = {
+            "form": form,
+        }
+        return render(request, "vote/user_info.html", ctx)
+
+@csrf_exempt
+def save_answer(request):
+    if request.method == "POST":
+        #todo JS 통신방법 ajax 밖에 없나? 프론트에서 보여줄 필요 없는데도? 
+        req = json.loads(request.body)
+        print(req)
+        #todo 현재 로그인 중인 유저의 정보를 가져오기
+        user = User.objects.all()
+        print(user)
+        form = EnrollmentForm(request.POST)
+        if form.is_valid():
+            enrollment = form.save()
+            # result = Result.objects.create()
+            # user.result = result
+            # user.save()
+            # return render(request, "vote/test.html")
+            return redirect("vote:home")
+        else:
+            ctx = {
+                "form": form,
+            }
+            return render(request, "vote/user_info.html", ctx)
+    if request.method == "GET":
+        form = EnrollmentForm()
         ctx = {
             "form": form,
         }
