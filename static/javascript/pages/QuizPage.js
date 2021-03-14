@@ -57,7 +57,6 @@ function QuizPage() {
 		currentQuiz.quiz.answer = answerInfo.answerIndex
 
 		const nextQuiz = this.quizList[currentQuiz.index + 1]
-
 		setTimeout(() => {
 			if (nextQuiz) {
 				this.setCurrentQuiz(nextQuiz)
