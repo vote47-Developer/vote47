@@ -7,7 +7,7 @@ from .forms import UserForm
 from .models import User, Candidate
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
-from .forms import UserForm, EnrollmentForm
+from .forms import UserForm
 from .models import User, Candidate, Enrollment
 from django.views.decorators.csrf import csrf_exempt
 import json
@@ -60,29 +60,12 @@ def user_info(request):
 
 @csrf_exempt
 def save_answer(request):
-    if request.method == "POST":
-        #todo JS 통신방법 ajax 밖에 없나? 프론트에서 보여줄 필요 없는데도? 
-        req = json.loads(request.body)
-        print(req)
-        #todo 현재 로그인 중인 유저의 정보를 가져오기
-        user = User.objects.all()
-        print(user)
-        form = EnrollmentForm(request.POST)
-        if form.is_valid():
-            enrollment = form.save()
-            # result = Result.objects.create()
-            # user.result = result
-            # user.save()
-            # return render(request, "vote/test.html")
-            return redirect("vote:home")
-        else:
-            ctx = {
-                "form": form,
-            }
-            return render(request, "vote/user_info.html", ctx)
-    if request.method == "GET":
-        form = EnrollmentForm()
-        ctx = {
-            "form": form,
-        }
-        return render(request, "vote/user_info.html", ctx)
+    req = json.loads(request.body)
+    quiz_id = req["quizId"]
+    example_id = req["exampleId"]
+    example = Example.objects.get(id=example_id)
+    enrollment = Enrollment.objects.create(num=quiz_id, user=request.user, example=example)
+    print(enrollment)
+    #todo 현재 로그인 중인 유저의 정보를 가져오기
+    # user = User.objects.all()
+    return render(request, "vote/user_info.html")
