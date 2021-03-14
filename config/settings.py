@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-secret_file = os.path.join(BASE_DIR, 'secrets.json')  
+secret_file = os.path.join(BASE_DIR, 'secrets.json')
 # secrets.json 파일 위치를 명시
 
 with open(secret_file) as f:
@@ -128,3 +128,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
+AUTH_USER_MODEL = "vote.User"
+
+AUTHENTICATION_BACKENDS = [
+    # auth_backend.py implementing Class YourAuth inside yourapp folder
+    'vote.auth_backend.PasswordlessAuthBackend',
+    # Default authentication of Django
+    'django.contrib.auth.backends.ModelBackend',
+]

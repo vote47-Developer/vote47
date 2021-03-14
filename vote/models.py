@@ -10,10 +10,12 @@ class Candidate(models.Model):
     url = models.URLField(verbose_name='온라인공약집링크', blank=True)
 
 
-class User(models.Model):
-    nickname = models.CharField(max_length=100, verbose_name="닉네임")
-    age = models.PositiveIntegerField(verbose_name='나이')
-    job = models.CharField(max_length=100, verbose_name='직업')
+class User(AbstractUser):
+    nickname = models.CharField(
+        max_length=100, verbose_name="닉네임", blank=True, null=True)
+    age = models.PositiveIntegerField(verbose_name='나이', blank=True, null=True)
+    job = models.CharField(
+        max_length=100, verbose_name='직업', blank=True, null=True)
     result = models.ForeignKey(
         Candidate, on_delete=models.CASCADE, blank=True, null=True)
     TYPE_OF_GENDER = (
@@ -21,10 +23,19 @@ class User(models.Model):
         ('female', '여성'),
         ('none', '선택하지않음'),
     )
-    gender = models.CharField(max_length=20, choices=TYPE_OF_GENDER)
+    gender = models.CharField(
+        max_length=20, choices=TYPE_OF_GENDER, blank=True, null=True)
+    username = models.CharField(
+        max_length=150, verbose_name="이름", blank=True, null=True)
+
+    USERNAME_FIELD = "id"
+    REQUIRED_FIELDS = ["username"]
 
     def __str__(self):
-        return self.nickname
+        if self.nickname:
+            return self.nickname
+        elif self.username:
+            return self.username
 
 
 class Quiz(models.Model):
