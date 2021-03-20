@@ -45,7 +45,7 @@ def user_info(request):
             if is_user is not None:
                 auth_login(request, is_user)
 
-            return redirect("vote:home")
+            return render(request, "vote/home.html")
         else:
             ctx = {
                 "form": form,

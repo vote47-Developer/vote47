@@ -1,5 +1,17 @@
+{% extends 'vote/base.html' %}
+{% load static %}
+
+
+<!-- 동일한 css link 를 가지는데 -->
+{% block styleSignup %}
+<link rel="stylesheet" href="{% static 'css/global.css' %}" />
+<link rel="stylesheet" href="{% static 'css/nav.css' %}" />
+<link rel="stylesheet" href="{% static 'css/sign-up.css' %}" />
+{% endblock %}
+
+{% block signup %}
 <div>
-    <form action="" method="POST">
+    <form action="" method="POST" class="container">
         {% csrf_token %}
         {% for field in form %}
             {% if field.name != "result" %}
@@ -13,4 +25,5 @@
             <button type="submit">테스트하기</button>
         </div>
     </form>
-</div>
+</div>    
+{% endblock %}
