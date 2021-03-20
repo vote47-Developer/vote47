@@ -25,5 +25,29 @@
             <button type="submit">테스트하기</button>
         </div>
     </form>
+
+    <button class="open">모달열기</button>
+    <div class="modal-wrapper" style="display: none;">
+        <div class="modal">
+            <div class="modal-title">모달 제목</div>
+            <p>모달 내용은 이렇습니다!</p>
+            <div class="close-wrapper">
+                <button class="close">닫기</button>
+            </div>
+        </div>
+    </div>
 </div>    
+<script>
+    let open = document.querySelector(".open");
+    let close = document.querySelector(".close");
+    let modal = document.querySelector(".modal-wrapper");
+
+    open.onclick = () => {
+        modal.style.display = 'flex';
+    }
+
+    close.onclick = () => {
+        modal.style.display = 'none';
+    }
+</script>
 {% endblock %}

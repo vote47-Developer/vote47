@@ -10,8 +10,18 @@ function Quiz(parent, props) {
 
 	this.setElements = () => {
 		this.template = /*html*/ `
-      <div class="quiz dp-none" data-id="${this.id}">
-        <div class="question">Q. ${this.question}</div>
+		<div class="quiz dp-none" data-id="${this.id}">
+		<div class="question">Q. ${this.question}</div>
+		<button class="open">모달열기</button>
+		<div class="modal-wrapper" style="display: none;">
+			<div class="modal">
+				<div class="modal-title">모달 제목</div>
+				<p>모달 내용은 이렇습니다!</p>
+				<div class="close-wrapper" >
+					<button class="close">닫기</button>
+				</div>
+			</div>
+    	</div>
         <ul class="example-container">
           ${this.examples
 						.map(
@@ -22,15 +32,23 @@ function Quiz(parent, props) {
         </ul>
       </div>
     `
-
+		
 		this.target = document.createElement('div')
 		this.target.innerHTML = this.template
 		this.target = this.target.firstElementChild
 
 		this.exampleContainer = this.target.querySelector('.example-container')
+		this.open = this.target.querySelector('.open');		
+		this.close = this.target.querySelector('.close');		
 	}
 
 	this.bindEvents = () => {
+		this.open.addEventListener('click', (e) => {
+			e.target.nextElementSibling.style.display = 'flex';
+		})
+		this.close.addEventListener('click', (e) => {		
+			e.target.parentNode.parentNode.parentNode.style.display = 'none';
+		})
 		this.exampleContainer.addEventListener('click', (e) => {
 			this.clickEventListener(e)
 		})
@@ -70,14 +88,8 @@ function Quiz(parent, props) {
 		})
 				.then(
 					(response) => {
-						console.log(response.data);
 					}
 				)
-		// try {
-			
-		// } catch (error) {
-		// 	console.log(error);
-		// }
 	}
 
 	this.hide = () => {
