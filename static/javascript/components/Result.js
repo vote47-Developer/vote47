@@ -29,11 +29,9 @@ function Result(props) {
 				}
       </div>
     `
-
 		this.target = document.createElement('div')
 		this.target.innerHTML = this.template
 		this.target = this.target.firstElementChild
-		console.log(this.target)
 	}
 
 	this.init()

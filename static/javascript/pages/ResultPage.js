@@ -24,7 +24,6 @@ function ResultPage() {
 		this.resultContainer = this.target.querySelector('.result-container')
 		this.resultList.forEach((resultInfo) => {
 			const result = new Result(resultInfo)
-			console.log(result.target)
 			this.resultContainer.appendChild(result.target)
 		})
 
