@@ -12,8 +12,10 @@ from .models import User, Candidate, Enrollment
 from django.views.decorators.csrf import csrf_exempt
 import json
 
+
 def home(request):
     return render(request, 'vote/home.html')
+
 
 def get_quiz_list(request):
     quizs = Quiz.objects.prefetch_related('examples').all()
@@ -31,8 +33,10 @@ def get_quiz_list(request):
     }
 
     return HttpResponse(json.dumps(context), content_type="application/json")
-    
+
 # user 정보
+
+
 def user_info(request):
     if request.method == "POST":
         form = UserForm(request.POST)
@@ -58,14 +62,16 @@ def user_info(request):
         }
         return render(request, "vote/user_info.html", ctx)
 
+
 @csrf_exempt
 def save_answer(request):
     req = json.loads(request.body)
     quiz_id = req["quizId"]
     example_id = req["exampleId"]
     example = Example.objects.get(id=example_id)
-    enrollment = Enrollment.objects.create(num=quiz_id, user=request.user, example=example)
+    enrollment = Enrollment.objects.create(
+        num=quiz_id, user=request.user, example=example)
     print(enrollment)
-    #todo 현재 로그인 중인 유저의 정보를 가져오기
+    # todo 현재 로그인 중인 유저의 정보를 가져오기
     # user = User.objects.all()
     return render(request, "vote/user_info.html")
