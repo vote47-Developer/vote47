@@ -11,20 +11,27 @@
 
 {% block signup %}
 <div>
-    <form action="" method="POST" class="container">
-        {% csrf_token %}
-        {% for field in form %}
-            {% if field.name != "result" %}
-                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                {{ field }}
-                <br>
-            {% endif %}
-        {% endfor %}
-
-        <div>
-            <button type="submit">테스트하기</button>
+    <div id="login-page">
+        <div id="inner-container">
+            <h1 class="title">login</h1>
+            <div class="login-container">
+                <form action="" method="POST" class="container">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        {% if field.name != "result" %}
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            {{ field }}
+                            <br>
+                        {% endif %}
+                    {% endfor %}
+            
+                    <div>
+                        <button class="restart-btn" type="submit">테스트하기</button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </form>
+    </div>
 
     <button class="open">모달열기</button>
     <div class="modal-wrapper" style="display: none;">
