@@ -29,7 +29,7 @@ class User(AbstractUser):
         max_length=150, verbose_name="이름", blank=True, null=True)
 
     USERNAME_FIELD = "id"
-    REQUIRED_FIELDS = ["username"]
+    REQUIRED_FIELDS = ["username", "nickname", "age", "job", "gender"]
 
     def __str__(self):
         if self.nickname:
