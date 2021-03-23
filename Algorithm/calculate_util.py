@@ -3,92 +3,110 @@ POINT_SET = [
     {
         # Question 1
         'category' : 0,
-        'points' : [[0, 5, 2, 1, 4],
-                    [2, 3, 1, 4, 0]]
+        'points' : [[1, 0.5, 0.5, 0, 0],
+                    [1, 1, 0, 0, 0]]
     },
     {
         # Question 2
-        'category': 0,
-        'points': [[0, 5, 2, 1, 4],
-                   [2, 3, 1, 4, 0]]
+        'category': 1,
+        'points': [[0.71, 0.85, 1, 1, 0],
+                   [1, 1, 1, 1, 0]]
     },
     {
         # Question 3
-        'category': 0,
-        'points': [[0, 5, 2, 1, 4],
-                   [2, 3, 1, 4, 0]]
+        'category': 3,
+        'points': [[0, 1, 0, 0, 0],
+                   [0, 0, 1, 0, 0]]
     },
     {
         # Question 4
         'category': 0,
-        'points': [[0, 5, 2, 1, 4],
-                   [2, 3, 1, 4, 0]]
+        'points': [[1, 0, 1, 0, 0],
+                   [1, 1, 0, 0, 0]]
     },
     {
         # Question 5
         'category': 0,
-        'points': [[0, 5, 2, 1, 4],
-                   [2, 3, 1, 4, 0]]
+        'points': [[1, 0, 0, 0, 0],
+                   [0, 1, 0, 0, 0]]
     },
     {
         # Question 6
-        'category': 0,
-        'points': [[0, 5, 2, 1, 4],
-                   [2, 3, 1, 4, 0]]
+        'category': 5,
+        'points': [[0, 1, 0, 0, 0],
+                   [0, 0, 1, 0, 0]]
     },
     {
         # Question 7
         'category': 0,
-        'points': [[0, 5, 2, 1, 4],
-                   [2, 3, 1, 4, 0]]
+        'points': [[0, 0, 1, 0, 0],
+                   [0, 1, 0, 0, 0]]
     },
     {
         # Question 8
         'category': 0,
-        'points': [[0, 5, 2, 1, 4],
-                   [2, 3, 1, 4, 0]]
+        'points': [[1, 0, 0, 0, 0],
+                   [0, 0, 1, 0, 0]]
     },
     {
         # Question 9
-        'category': 0,
-        'points': [[0, 5, 2, 1, 4],
-                   [2, 3, 1, 4, 0]]
+        'category': 2,
+        'points': [[0, 0, 1, 0, 0],
+                   [0, 1, 0, 0, 0]]
     },
     {
         # Question 10
         'category': 0,
-        'points': [[0, 5, 2, 1, 4],
-                   [2, 3, 1, 4, 0]]
+        'points': [[0, 1, 0, 0, 0],
+                   [1, 0, 0, 0, 0]]
     },
     {
         # Question 11
-        'category': 0,
-        'points': [[0, 5, 2, 1, 4],
-                   [2, 3, 1, 4, 0]]
+        'category': 5,
+        'points': [[0, 1, 0, 0, 0],
+                   [0, 0, 1, 0, 0]]
     },
     {
         # Question 12
-        'category': 0,
-        'points': [[0, 5, 2, 1, 4],
-                   [2, 3, 1, 4, 0]]
+        'category': 3,
+        'points': [[1, 0, 0, 0, 0],
+                   [0, 0, 1, 0, 0]]
     },
     {
         # Question 13
         'category': 0,
-        'points': [[0, 5, 2, 1, 4],
-                   [2, 3, 1, 4, 0]]
+        'points': [[1, 0, 0, 0, 0],
+                   [0, 0, 1, 0, 0]]
     },
     {
         # Question 14
         'category': 0,
-        'points': [[0, 5, 2, 1, 4],
-                   [2, 3, 1, 4, 0]]
+        'points': [[0, 1, 0, 0, 0],
+                   [0, 0, 1, 0, 0]]
+    },
+    {
+        # Question 15
+        'category': 0,
+        'points': [[0, 0, 1, 0, 0],
+                   [0, 1, 0, 0, 0]]
+    },
+    {
+        # Question 16
+        'category': 1,
+        'points': [[0, 0, 0, 0, 0],
+                   [0, 1, 0, 0, 0]]
+    },
+    {
+        # Question 17
+        'category': 0,
+        'points': [[1, 0, 0, 0, 0],
+                   [0, 1, 0, 0, 0]]
     },
     {
         # Category
         # TODO : points는 초기 가중치, set_category_weight에서 전역변수로 호출 후 수정됨
         'category': -1,
-        'points': [1, 1, 1.5, 3, 2, 4]
+        'points': [1, 1, 1, 1, 1, 1]
     },
 ]
 CATEGORY_NUM = 6
@@ -98,14 +116,12 @@ def calculate(response_list):
     set_category_weight(response_list[-1])
     score_set = get_score(response_list)
     score_sum = sum_score(score_set)
-    #print(score_set)
-    #print(score_sum)
     return score_set, score_sum
 
 def set_category_weight(target):
     global POINT_SET
     if POINT_SET[-1]['category'] == -1:
-        POINT_SET[-1]['points'][target - 1] = POINT_SET[-1]['points'][target - 1] * 1.5
+        POINT_SET[-1]['points'][target] = POINT_SET[-1]['points'][target] * 1.5
     else:
         print('Category wight error detected')
 
@@ -121,13 +137,14 @@ def get_score(response_list):
 
 def sum_score(score_set):
     category_weight = POINT_SET[-1]['points']
-    for i in range(len(score_set)):
-        score_set[i] = [s*category_weight[i] for s in score_set[i]]
-    return score_set
+    score_copy = score_set.copy()
+    for i in range(len(score_copy)):
+        score_copy[i] = [s*category_weight[i] for s in score_copy[i]]
+    return score_copy
 
 
 if __name__ == "__main__":
-    response_list = [4, 1, 3, 1, 2, 3, 5, 2, 1, 5, 2, 4, 1, 1, 2]
+    response_list = [4, 2, 2, 1, 2, 3, 5, 2, 1, 5, 2, 4, 1, 1, 2, 1, 2, 1,]
     result = calculate(response_list)
-    print(result)
+    print(result) # OUTPUT : 가중치 곱하기 전 카테고리 별 점수 획득, 가중치 곱한 후 카테고리 별 점수 획득
 
