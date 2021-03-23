@@ -113,17 +113,19 @@ CATEGORY_NUM = 6
 
 # 함수의 input인 response_list는 (질문의 수) 크기의 1D list. candidate_num은 후보의 수
 def calculate(response_list):
-    set_category_weight(response_list[-1])
+    category_list = set_category_weight(response_list[-1])
     score_set = get_score(response_list)
-    score_sum = sum_score(score_set)
-    return score_set, score_sum
+    score_weight = apply_weight(score_set, category_list)
+    score_sum = sum_score(score_weight)
+    return score_set, score_weight, score_sum
 
 def set_category_weight(target):
-    global POINT_SET
     if POINT_SET[-1]['category'] == -1:
-        POINT_SET[-1]['points'][target] = POINT_SET[-1]['points'][target] * 1.5
+        category_list = POINT_SET[-1]['points'].copy()
+        category_list[target] = category_list[target] * 1.5
     else:
         print('Category wight error detected')
+    return category_list
 
 def get_score(response_list):
     output = [[0., 0.] for _ in range(CATEGORY_NUM)] #카테고리별로 얻은 점수
@@ -135,16 +137,24 @@ def get_score(response_list):
     #print(output) #카테고리별 얻은 점수
     return output
 
-def sum_score(score_set):
-    category_weight = POINT_SET[-1]['points']
+def apply_weight(score_set, category_list):
+    category_weight = category_list
     score_copy = score_set.copy()
     for i in range(len(score_copy)):
         score_copy[i] = [s*category_weight[i] for s in score_copy[i]]
     return score_copy
 
+def sum_score(score_sum):
+    score_sum_copy = score_sum.copy()
+    score_cand1, score_cand2 = 0, 0
+    for set in score_sum_copy:
+        score_cand1 += set[0]
+        score_cand2 += set[1]
+    return score_cand1, score_cand2
 
 if __name__ == "__main__":
-    response_list = [4, 2, 2, 1, 2, 3, 5, 2, 1, 5, 2, 4, 1, 1, 2, 1, 2, 1,]
+    response_list = [3, 2, 2, 1, 2, 3, 5, 2, 1, 5, 2, 4, 1, 1, 2, 1, 2, 1,]
     result = calculate(response_list)
     print(result) # OUTPUT : 가중치 곱하기 전 카테고리 별 점수 획득, 가중치 곱한 후 카테고리 별 점수 획득
+
 
