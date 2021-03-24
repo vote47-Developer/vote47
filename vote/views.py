@@ -80,8 +80,13 @@ def save_answer(request):
 
 def candidate(request):
     user = User.objects.get(id=request.user.id)
-    calculation = calculate(response_list=[1, 1, 1, 1, 1, 1, 1,
-                                           1, 1, 1, 1, 1, 1, 1, 1, ])
+    print(user)
+    enrollment = Enrollment.objects.all()
+    response_list = []
+    print(enrollment)
+    for i in enrollment:
+        response_list.append(i)
+    calculation = calculate(response_list=response_list)
     score_sum = calculation[-1]
     score_percentage = calculation[0]
     if score_sum[0] > score_sum[1]:
