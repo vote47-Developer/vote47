@@ -11,6 +11,7 @@ from .forms import UserForm
 from .models import User, Candidate, Enrollment
 from django.views.decorators.csrf import csrf_exempt
 import json
+from .calculate_util import *
 
 
 def home(request):
@@ -75,3 +76,23 @@ def save_answer(request):
     # todo 현재 로그인 중인 유저의 정보를 가져오기
     # user = User.objects.all()
     return render(request, "vote/user_info.html")
+
+
+def candidate(request):
+    user = User.objects.get(id=request.user.id)
+    calculation = calculate(response_list=[2, 1, 2, 2, 2, 2, 1,
+                                           3, 1, 1, 2, 2, 1, 2, 1, 2, 2, 2, ])[-1]
+    print(calculation)
+    if calculation[0] > calculation[1]:
+        winner = '기호 1번 박영선'
+        win_rate = calculation[0]
+    else:
+        winner = '기호 2번 오세훈'
+        win_rate = calculation[1]
+
+    ctx = {
+        'user': user,
+        'winner': winner,  # 후보자
+        'win_rate': round(win_rate*100, 1)  # 예측 종합 일치율
+    }
+    return render(request, 'vote/result.html', ctx)
