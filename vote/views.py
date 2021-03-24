@@ -80,19 +80,28 @@ def save_answer(request):
 
 def candidate(request):
     user = User.objects.get(id=request.user.id)
-    calculation = calculate(response_list=[2, 1, 2, 2, 2, 2, 1,
-                                           3, 1, 1, 2, 2, 1, 2, 1, 2, 2, 2, ])[-1]
-    print(calculation)
-    if calculation[0] > calculation[1]:
+    calculation = calculate(response_list=[1, 1, 1, 1, 1, 1, 1,
+                                           1, 1, 1, 1, 1, 1, 1, 1, ])
+    score_sum = calculation[-1]
+    score_percentage = calculation[0]
+    if score_sum[0] > score_sum[1]:
         winner = '기호 1번 박영선'
-        win_rate = calculation[0]
+        win_rate = score_sum[0]
+        win_cat = score_percentage[0]
     else:
         winner = '기호 2번 오세훈'
-        win_rate = calculation[1]
+        win_rate = score_sum[1]
+        win_cat = score_percentage[1]
 
     ctx = {
         'user': user,
         'winner': winner,  # 후보자
-        'win_rate': round(win_rate*100, 1)  # 예측 종합 일치율
+        'win_rate': round(win_rate*100, 1),  # 예측 종합 일치율
+        'win_personal': win_cat[0],
+        'win_real_estate': win_cat[1],
+        'win_economy': win_cat[2],
+        'win_welfare': win_cat[3],
+        'win_youngs': win_cat[4],
+        'win_social_value': win_cat[5],
     }
     return render(request, 'vote/result.html', ctx)
