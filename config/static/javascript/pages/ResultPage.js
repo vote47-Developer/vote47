@@ -2,6 +2,8 @@ const getData = async() => {
 	const url = "/candidate";
 	const {data} = await axios.get(url);
 	console.log(data);
+	console.log(data.user)
+	return data;
 }
 
 function ResultPage() {
@@ -9,7 +11,9 @@ function ResultPage() {
 		this.resultList = [...resultList]
 		this.setElements()
 		this.bindEvents()
-		getData()
+		let data = getData();
+		console.log(data);
+		console.log(data.user);
 	}
 	
 	this.setElements = () => {
