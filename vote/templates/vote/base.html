@@ -1,31 +1,23 @@
 {% load static %}
 
 <!DOCTYPE html>
-    <html lang="en">
+<html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        {% block style %}
-        {% endblock %}
-        {% block styleSignup %}
-        {% endblock %}
+        {% block style %} {% endblock %} {% block styleSignup %} {% endblock %} {% block script %} {% endblock %}
+        {%block scriptSignup %} {% endblock %}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
-        {% block script %}
-        {% endblock %}
-        {% block scriptSignup %}
-        {% endblock %}
         <title>Vote47</title>
     </head>
     <body>
         <nav>
             <div class="navbar">
-                <h1 class="title">Vote47</h1>
+                <img src="{%static 'media/logo/logogo.png' %}" alt="" height="30vh" />
             </div>
         </nav>
-        {% block main %}
-        {% endblock %}
-        {% block signup %}
-        {% endblock %}
+        {% block main %} {% endblock %} {% block signup %} {% endblock %}
     </body>
 </html>
