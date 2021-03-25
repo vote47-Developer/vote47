@@ -80,11 +80,11 @@ def save_answer(request):
 
 def candidate(request):
     user = User.objects.get(id=request.user.id)
-    enrollment = Enrollment.objects.all()
+    enrollment = Enrollment.objects.filter(user=user)
     response_list = []
     for i in enrollment:
-        response_list.append(i)
-        response_list = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        response_list.append(i.example)
+        
     calculation = calculate(response_list=response_list)
     score_sum = calculation[-1]
     score_percentage = calculation[0]
@@ -114,10 +114,11 @@ def candidate(request):
 def detail(request):
     user = User.objects.get(id=request.user.id)
     enrollment = Enrollment.objects.all()
+
     response_list = []
     for i in enrollment:
-        response_list.append(i)
-        response_list = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        response_list.append(i.example)
+         
     calculation = calculate(response_list=response_list)
     score_sum = calculation[-1]
     score_percentage = calculation[0]
