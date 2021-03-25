@@ -1,9 +1,16 @@
+const getData = () => {
+	const url = "/candidateAjax";
+	const {data} = await axios.get(url);
+	console.log(data);
+}
+
 function ResultPage() {
 	this.init = (resultList) => {
 		this.resultList = [...resultList]
 
 		this.setElements()
 		this.bindEvents()
+		getData();
 	}
 
 	this.setElements = () => {

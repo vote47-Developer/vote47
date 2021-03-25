@@ -84,7 +84,7 @@ def candidate(request):
     response_list = []
     for i in enrollment:
         response_list.append(i.example)
-        
+
     calculation = calculate(response_list=response_list)
     score_sum = calculation[-1]
     score_percentage = calculation[0]
@@ -118,7 +118,7 @@ def detail(request):
     response_list = []
     for i in enrollment:
         response_list.append(i.example)
-         
+
     calculation = calculate(response_list=response_list)
     score_sum = calculation[-1]
     score_percentage = calculation[0]
