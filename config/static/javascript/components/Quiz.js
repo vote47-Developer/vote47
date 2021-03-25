@@ -16,7 +16,7 @@ function Quiz(parent, props) {
 		<div class="modal-wrapper" style="display: none;">
 			<div class="modal">
 				<div class="modal-title">모달 제목</div>
-				<p>모달 내용은 이렇습니다!</p>
+				<p>${this.background}</p>
 				<div class="close-wrapper" >
 					<button class="close">닫기</button>
 				</div>
