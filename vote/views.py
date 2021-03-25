@@ -1,5 +1,4 @@
 import json
-
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from vote.models import *
@@ -12,11 +11,10 @@ from .models import User, Candidate, Enrollment
 from django.views.decorators.csrf import csrf_exempt
 import json
 from .calculate_util import *
-
+from django.http import JsonResponse
 
 def home(request):
     return render(request, 'vote/home.html')
-
 
 def get_quiz_list(request):
     quizs = Quiz.objects.prefetch_related('examples').all()
@@ -83,8 +81,14 @@ def candidate(request):
     enrollment = Enrollment.objects.filter(user=user)
     response_list = []
     for i in enrollment:
+        print('i : ' , i)
         response_list.append(i.example)
         
+    
+    print('user', user)
+    print('enrollment', enrollment)
+    print('response_list', response_list)
+    
     calculation = calculate(response_list=response_list)
     score_sum = calculation[-1]
     score_percentage = calculation[0]
@@ -96,19 +100,26 @@ def candidate(request):
         winner = '기호 2번 오세훈'
         win_rate = score_sum[1]
         win_cat = score_percentage[1]
+        
+    win_list = [win_cat[0], win_cat[1], win_cat[2],
+                win_cat[3], win_cat[4], win_cat[5]]
+    
+    win_dic = {"win_personal": win_cat[0], "win_real_estate": win_cat[1], "win_economy": win_cat[2],
+               "win_welfare": win_cat[3], "win_youngs": win_cat[4], "win_social_value": win_cat[5]}
 
-    ctx = {
-        'user': user,
-        'winner': winner,  # 후보자
-        'win_rate': round(win_rate*100, 1),  # 예측 종합 일치율
-        'win_personal': win_cat[0],
-        'win_real_estate': win_cat[1],
-        'win_economy': win_cat[2],
-        'win_welfare': win_cat[3],
-        'win_youngs': win_cat[4],
-        'win_social_value': win_cat[5],
-    }
-    return render(request, 'vote/result.html', ctx)
+    return JsonResponse({"user": user, "winner": winner, "win_rate": round(win_rate*100, 1), "win_dic": win_dic, "win_list": win_list})
+    # ctx = {
+    #     'user': user,
+    #     'winner': winner,  # 후보자
+    #     'win_rate': round(win_rate*100, 1),  # 예측 종합 일치율
+    #     'win_personal': win_cat[0],
+    #     'win_real_estate': win_cat[1],
+    #     'win_economy': win_cat[2],
+    #     'win_welfare': win_cat[3],
+    #     'win_youngs': win_cat[4],
+    #     'win_social_value': win_cat[5],
+    # }
+    # return render(request, 'vote/result.html', ctx)
 
 
 def detail(request):
@@ -141,6 +152,7 @@ def detail(request):
         else:
             ox.append('x')
     print(ox)
+    
     ctx = {
         'user': user,
         'winner': winner,  # 후보자
