@@ -1,17 +1,24 @@
+const getData = async() => {
+	const url = "/candidate";
+	const {data} = await axios.get(url);
+	console.log(data);
+}
+
 function ResultPage() {
 	this.init = (resultList) => {
 		this.resultList = [...resultList]
-
 		this.setElements()
 		this.bindEvents()
+		getData()
 	}
-
+	
 	this.setElements = () => {
 		this.template = /*html*/ `
 			<div id="result-page">
 				<div class="inner-container">
 					<h1 class="title">Result 🥸</h1>
 					<div class="result-container"></div>
+					<div> Hello World! </div>
 					<button class="restart-btn">RESTART</button>
 				</div>
       </div>
@@ -22,13 +29,9 @@ function ResultPage() {
 		this.target = this.target.firstElementChild
 
 		this.resultContainer = this.target.querySelector('.result-container')
-		this.resultList.forEach((resultInfo) => {
-			const result = new Result(resultInfo)
-			this.resultContainer.appendChild(result.target)
-		})
-
 		this.restartBtn = this.target.querySelector('.restart-btn')
 	}
+
 
 	this.bindEvents = () => {
 		this.restartBtn.addEventListener('click', this.clickEventListener)
@@ -38,3 +41,5 @@ function ResultPage() {
 		router.route('quiz')
 	}
 }
+
+
