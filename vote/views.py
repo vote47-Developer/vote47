@@ -162,6 +162,5 @@ def detail(request):
         'ox12': ox[9],
         'ox13': ox[10],
         'ox14': ox[11],
-
     }
     return render(request, 'vote/detail.html', ctx)
