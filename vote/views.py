@@ -98,6 +98,7 @@ def candidate(request):
         response_list.append(i.example.num)
         idx += 1
 
+    print("idx", idx)
     print('user', user)
     print('enrollment', enrollment)
     print('response_list', response_list)

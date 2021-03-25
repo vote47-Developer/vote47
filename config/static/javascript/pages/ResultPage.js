@@ -9,7 +9,7 @@ function ResultPage() {
 		this.resultList = [...resultList]
 		this.setElements()
 		this.bindEvents()
-		getData();
+		
 	}
 
 	
