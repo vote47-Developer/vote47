@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.core.exceptions import ValidationError
+from django import forms
 
 
 class Candidate(models.Model):
@@ -10,9 +12,14 @@ class Candidate(models.Model):
     url = models.URLField(verbose_name='온라인공약집링크', blank=True)
 
 
+def is_nickname(value):
+    if value == None:
+        raise forms.ValidationError("no")
+
+
 class User(AbstractUser):
     nickname = models.CharField(
-        max_length=100, verbose_name="닉네임", blank=True, null=True)
+        max_length=100, verbose_name="닉네임", blank=True, null=True, validators=[is_nickname])
     age = models.PositiveIntegerField(verbose_name='나이', blank=True, null=True)
     job = models.CharField(
         max_length=100, verbose_name='직업', blank=True, null=True)
@@ -36,6 +43,13 @@ class User(AbstractUser):
             return self.nickname
         elif self.username:
             return self.username
+        elif self.age:
+            return str(self.age)
+
+    # def clean(self, *args, ** kwargs):
+    #     nickname = self.nickname
+    #     if nickname == "":
+    #         raise ValidationError("사용자의 닉네임을 입력하세요.")
 
 
 class Quiz(models.Model):

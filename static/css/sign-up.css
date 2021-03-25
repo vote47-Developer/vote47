@@ -63,7 +63,7 @@
 }
 
 .login__form-field {
-    width: 350px;
+    /* width: 350px; */
     /* height: 30px; */
     font-weight: bold;
 
@@ -74,11 +74,11 @@
 }
 
 .login__form-field label {
-    width: 100px;
+    /* width: 100px; */
 }
 
 .login__form-field input {
-    width: 240px;
+    /* width: 240px; */
     background-color: #efefef;
     border: none;
     border-radius: 20px;
@@ -95,7 +95,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 120px;
+    /* width: 120px; */
     height: 48px;
     border-radius: 12px;
     font-size: 18px;
