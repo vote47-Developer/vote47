@@ -24,6 +24,12 @@
                             </div>
                         {% endif %}
                     {% endfor %}
+
+                    {% if error %}
+                            <div class="error">
+                                {{ error }}
+                            </div>
+                    {% endif %}
             
                     <div class="login__form-actions">
                         <button class="restart-btn" type="submit">테스트하기</button>

@@ -12,14 +12,14 @@ class Candidate(models.Model):
     url = models.URLField(verbose_name='온라인공약집링크', blank=True)
 
 
-def is_nickname(value):
-    if value == None:
-        raise forms.ValidationError("no")
+# def is_nickname(value):
+#     if value == None:
+#         raise forms.ValidationError("no")
 
 
 class User(AbstractUser):
     nickname = models.CharField(
-        max_length=100, verbose_name="닉네임", blank=True, null=True, validators=[is_nickname])
+        max_length=100, verbose_name="닉네임", blank=True, null=True)
     age = models.PositiveIntegerField(verbose_name='나이', blank=True, null=True)
     job = models.CharField(
         max_length=100, verbose_name='직업', blank=True, null=True)
@@ -36,7 +36,7 @@ class User(AbstractUser):
         max_length=150, verbose_name="이름", blank=True, null=True)
 
     USERNAME_FIELD = "id"
-    REQUIRED_FIELDS = ["username", "nickname", "age", "job", "gender"]
+    REQUIRED_FIELDS = ["username", ]
 
     def __str__(self):
         if self.nickname:

@@ -42,23 +42,19 @@ def user_info(request):
     if request.method == "POST":
         form = UserForm(request.POST)
         if form.is_valid():
-            if(form.cleaned_data.get("nickname") == None):
-                return render(request, "vote/user_info.html", {"form": form})
-            elif(form.cleaned_data.get("age") == None):
-                return render(request, "vote/user_info.html", {"form": form})
-            elif(form.cleaned_data.get("job") == None):
-                return render(request, "vote/user_info.html", {"form": form})
+            if((form.cleaned_data.get("nickname") == None) or (form.cleaned_data.get("age") == None) or (form.cleaned_data.get("job") == None)):
+                ctx = {
+                    "form": form,
+                    "error": "닉네임, 나이, 직업을 입력해주세요."
+                }
+                return render(request, "vote/user_info.html", ctx)
 
-            print(form.cleaned_data.get("nickname"))
             user = form.save()
             user.username = user.id
             user.save()
-            print(user.nickname)
-            print("yes")
 
             is_user = authenticate(request, username=user.username)
             if is_user is not None:
-                print("hihi")
                 auth_login(request, is_user)
 
             return render(request, "vote/home.html")
@@ -95,7 +91,7 @@ def candidate(request):
     response_list = []
     for i in enrollment:
         response_list.append(i.example)
-        
+
     calculation = calculate(response_list=response_list)
     score_sum = calculation[-1]
     score_percentage = calculation[0]
@@ -129,7 +125,7 @@ def detail(request):
     response_list = []
     for i in enrollment:
         response_list.append(i.example)
-         
+
     calculation = calculate(response_list=response_list)
     score_sum = calculation[-1]
     score_percentage = calculation[0]

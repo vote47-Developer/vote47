@@ -26,6 +26,12 @@ function Router() {
 			resultPage.init(resultList)
 			app.innerHTML = ''
 			app.appendChild(resultPage.target)
+			document.domain = "http://127.0.0.1:8000/vote/candidate"
+			// var url1 = "http://127.0.0.1:8000/result"
+			// var url2 = "http://127.0.0.1:8000/vote/candidate"
+			// if(document.URL.match(url1)) {
+			// 	document.location.href = document.URL.replace(url1, url2);
+			// }
 		}
 	}
 }
