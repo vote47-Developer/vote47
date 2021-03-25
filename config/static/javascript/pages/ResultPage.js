@@ -29,10 +29,6 @@ function ResultPage() {
 		this.target = this.target.firstElementChild
 
 		this.resultContainer = this.target.querySelector('.result-container')
-		this.resultList.forEach((resultInfo) => {
-			const result = new Result(resultInfo)
-			this.resultContainer.appendChild(result.target)
-		})
 
 		this.restartBtn = this.target.querySelector('.restart-btn')
 	}

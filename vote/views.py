@@ -165,3 +165,34 @@ def detail(request):
         'ox14': ox[11],
     }
     return render(request, 'vote/detail.html', ctx)
+
+
+def candidateAjax(request):
+    user = User.objects.get(id=request.user.id)
+    enrollment = Enrollment.objects.filter(user=user)
+    response_list = []
+    for i in enrollment:
+        response_list.append(i.example)
+        print(i)
+
+    print(user)
+    print(enrollment)
+    print(response_list)
+    calculation = calculate(response_list=response_list)
+    score_sum = calculation[-1]
+    score_percentage = calculation[0]
+    if score_sum[0] > score_sum[1]:
+        winner = '기호 1번 박영선'
+        win_rate = score_sum[0]
+        win_cat = score_percentage[0]
+    else:
+        winner = '기호 2번 오세훈'
+        win_rate = score_sum[1]
+        win_cat = score_percentage[1]
+
+    win_list = [win_cat[0], win_cat[1], win_cat[2],
+                win_cat[3], win_cat[4], win_cat[5]]
+    win_dic = {"win_personal": win_cat[0], "win_real_estate": win_cat[1], "win_economy": win_cat[2],
+               "win_welfare": win_cat[3], "win_youngs": win_cat[4], "win_social_value": win_cat[5]}
+
+    return JsonResponse({"user": user, "winner": winner, "win_rate": round(win_rate*100, 1), "win_dic": win_dic, "win_list": win_list})
