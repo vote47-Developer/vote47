@@ -115,25 +115,25 @@ def candidate(request):
         win_rate = score_sum[1]
         win_cat = score_percentage[1]
 
-    win_list = [win_cat[0], win_cat[1], win_cat[2],
-                win_cat[3], win_cat[4], win_cat[5]]
+    # win_list = [win_cat[0], win_cat[1], win_cat[2],
+    #             win_cat[3], win_cat[4], win_cat[5]]
 
-    win_dic = {"win_personal": win_cat[0], "win_real_estate": win_cat[1], "win_economy": win_cat[2],
-               "win_welfare": win_cat[3], "win_youngs": win_cat[4], "win_social_value": win_cat[5]}
+    # win_dic = {"win_personal": win_cat[0], "win_real_estate": win_cat[1], "win_economy": win_cat[2],
+    #            "win_welfare": win_cat[3], "win_youngs": win_cat[4], "win_social_value": win_cat[5]}
 
-    return JsonResponse({"user": user.nickname, "winner": winner, "win_rate": round(win_rate*100, 1), "win_dic": win_dic, "win_list": win_list})
-    # ctx = {
-    #     'user': user,
-    #     'winner': winner,  # 후보자
-    #     'win_rate': round(win_rate*100, 1),  # 예측 종합 일치율
-    #     'win_personal': win_cat[0],
-    #     'win_real_estate': win_cat[1],
-    #     'win_economy': win_cat[2],
-    #     'win_welfare': win_cat[3],
-    #     'win_youngs': win_cat[4],
-    #     'win_social_value': win_cat[5],
-    # }
-    # return render(request, 'vote/result.html', ctx)
+    # return JsonResponse({"user": user.nickname, "winner": winner, "win_rate": round(win_rate*100, 1), "win_dic": win_dic, "win_list": win_list})
+    ctx = {
+        'user': user,
+        'winner': winner,  # 후보자
+        'win_rate': round(win_rate*100, 1),  # 예측 종합 일치율
+        'win_personal': win_cat[0],
+        'win_real_estate': win_cat[1],
+        'win_economy': win_cat[2],
+        'win_welfare': win_cat[3],
+        'win_youngs': win_cat[4],
+        'win_social_value': win_cat[5],
+    }
+    return render(request, 'vote/result.html', ctx)
 
 
 def detail(request):

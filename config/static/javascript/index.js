@@ -17,15 +17,16 @@ function Router() {
 			app.innerHTML = ''
 			app.appendChild(quizPage.target)
 		} else if (path === 'result') {
-			const resultList = quizPage.getResultList()
-			// 퀴즈의 개수가 0개라면 quiz 로 다시 route tlzl
-			if (resultList.length === 0) {
-				this.route('quiz')
-				return
-			}
-			resultPage.init(resultList)
-			app.innerHTML = ''
-			app.appendChild(resultPage.target)
+			// const resultList = quizPage.getResultList()
+			// // 퀴즈의 개수가 0개라면 quiz 로 다시 route tlzl
+			// if (resultList.length === 0) {
+			// 	this.route('quiz')
+			// 	return
+			// }
+			// resultPage.init(resultList)
+			// app.innerHTML = ''
+			// app.appendChild(resultPage.target)
+			window.location = "http://127.0.0.1:8000/candidate";
 		}
 	}
 }
