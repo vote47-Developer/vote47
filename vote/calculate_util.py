@@ -123,6 +123,8 @@ def set_category_weight(target):  # target은 맨 마지막 문제에서 고르�
         for i in range(CATEGORY_NUM):
             total_weight += category_list[i]
         total_weight -= category_list[target-1]
+        print(total_weight, category_list[target-1])
+        print(type(category_list[target-1]))
         for i in range(CATEGORY_NUM):
             category_list[i] = category_list[i]*(0.65/(total_weight*num_q[i]))
         category_list[target-1] = 0.35/num_q[target-1]
