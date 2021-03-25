@@ -9,6 +9,7 @@ function ResultPage() {
 		this.resultList = [...resultList]
 		this.setElements()
 		this.bindEvents()
+		
 	}
 
 	
@@ -32,6 +33,7 @@ function ResultPage() {
 				</div>
       </div>
     `
+
 
 		this.target = document.createElement('div')
 		this.target.innerHTML = this.template

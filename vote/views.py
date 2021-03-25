@@ -42,6 +42,14 @@ def user_info(request):
     if request.method == "POST":
         form = UserForm(request.POST)
         if form.is_valid():
+            # 추가사항
+            if((form.cleaned_data.get("nickname") == None) or (form.cleaned_data.get("age") == None) or (form.cleaned_data.get("job") == None)):
+                ctx = {
+                    "form": form,
+                    "error": "닉네임, 나이, 직업을 입력해주세요."
+                }
+                return render(request, "vote/user_info.html", ctx)
+
             user = form.save()
             user.username = user.id
             user.save()
@@ -90,6 +98,7 @@ def candidate(request):
         response_list.append(i.example.num)
         idx += 1
 
+    print("idx", idx)
     print('user', user)
     print('enrollment', enrollment)
     print('response_list', response_list)
@@ -106,25 +115,25 @@ def candidate(request):
         win_rate = score_sum[1]
         win_cat = score_percentage[1]
 
-    win_list = [win_cat[0], win_cat[1], win_cat[2],
-                win_cat[3], win_cat[4], win_cat[5]]
+    # win_list = [win_cat[0], win_cat[1], win_cat[2],
+    #             win_cat[3], win_cat[4], win_cat[5]]
 
-    win_dic = {"win_personal": win_cat[0], "win_real_estate": win_cat[1], "win_economy": win_cat[2],
-               "win_welfare": win_cat[3], "win_youngs": win_cat[4], "win_social_value": win_cat[5]}
+    # win_dic = {"win_personal": win_cat[0], "win_real_estate": win_cat[1], "win_economy": win_cat[2],
+    #            "win_welfare": win_cat[3], "win_youngs": win_cat[4], "win_social_value": win_cat[5]}
 
-    return JsonResponse({"user": user.nickname, "winner": winner, "win_rate": round(win_rate*100, 1), "win_dic": win_dic, "win_list": win_list})
-    # ctx = {
-    #     'user': user,
-    #     'winner': winner,  # 후보자
-    #     'win_rate': round(win_rate*100, 1),  # 예측 종합 일치율
-    #     'win_personal': win_cat[0],
-    #     'win_real_estate': win_cat[1],
-    #     'win_economy': win_cat[2],
-    #     'win_welfare': win_cat[3],
-    #     'win_youngs': win_cat[4],
-    #     'win_social_value': win_cat[5],
-    # }
-    # return render(request, 'vote/result.html', ctx)
+    # return JsonResponse({"user": user.nickname, "winner": winner, "win_rate": round(win_rate*100, 1), "win_dic": win_dic, "win_list": win_list})
+    ctx = {
+        'user': user,
+        'winner': winner,  # 후보자
+        'win_rate': round(win_rate*100, 1),  # 예측 종합 일치율
+        'win_personal': win_cat[0],
+        'win_real_estate': win_cat[1],
+        'win_economy': win_cat[2],
+        'win_welfare': win_cat[3],
+        'win_youngs': win_cat[4],
+        'win_social_value': win_cat[5],
+    }
+    return render(request, 'vote/result.html', ctx)
 
 
 def detail(request):
@@ -151,6 +160,7 @@ def detail(request):
         win_rate = score_sum[1]
         win_cat = score_percentage[1]
     ox = []
+
     for i in range(2, 14):
         if response_list[i] in answer_list[i]:
             ox.append('o')
@@ -182,3 +192,8 @@ def detail(request):
         'ox14': ox[11],
     }
     return render(request, 'vote/detail.html', ctx)
+
+    # win_dic = {"win_personal": win_cat[0], "win_real_estate": win_cat[1], "win_economy": win_cat[2],
+    #            "win_welfare": win_cat[3], "win_youngs": win_cat[4], "win_social_value": win_cat[5]}
+
+    # return JsonResponse({"user": user, "winner": winner, "win_rate": round(win_rate*100, 1), "win_dic": win_dic, "ox_list": ox})
