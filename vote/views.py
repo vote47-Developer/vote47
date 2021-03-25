@@ -127,6 +127,7 @@ def candidateAjax(request):
         response_list.append(i.example)
         print(i)
 
+    print(user)
     print(enrollment)
     print(response_list)
     calculation = calculate(response_list=response_list)
