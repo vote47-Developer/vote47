@@ -1,12 +1,14 @@
 from django.contrib import admin
 from . import models
 from .models import *
+from .forms import UserForm
 
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     list_display = ['nickname']
     list_display_links = ["nickname"]
+    form = UserForm
 
 
 @admin.register(Candidate)
