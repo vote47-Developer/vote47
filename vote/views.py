@@ -192,32 +192,7 @@ def detail(request):
     }
     return render(request, 'vote/detail.html', ctx)
 
-    win_dic = {"win_personal": win_cat[0], "win_real_estate": win_cat[1], "win_economy": win_cat[2],
-               "win_welfare": win_cat[3], "win_youngs": win_cat[4], "win_social_value": win_cat[5]}
+    # win_dic = {"win_personal": win_cat[0], "win_real_estate": win_cat[1], "win_economy": win_cat[2],
+    #            "win_welfare": win_cat[3], "win_youngs": win_cat[4], "win_social_value": win_cat[5]}
 
-    return JsonResponse({"user": user, "winner": winner, "win_rate": round(win_rate*100, 1), "win_dic": win_dic, "ox_list": ox})
-
-    # ctx = {
-    #     'user': user,
-    #     'winner': winner,  # 후보자
-    #     'win_rate': round(win_rate*100, 1),  # 예측 종합 일치율
-    #     'win_personal': win_cat[0],
-    #     'win_real_estate': win_cat[1],
-    #     'win_economy': win_cat[2],
-    #     'win_welfare': win_cat[3],
-    #     'win_youngs': win_cat[4],
-    #     'win_social_value': win_cat[5],
-    #     'ox3': ox[0],
-    #     'ox4': ox[1],
-    #     'ox5': ox[2],
-    #     'ox6': ox[3],
-    #     'ox7': ox[4],
-    #     'ox8': ox[5],
-    #     'ox9': ox[6],
-    #     'ox10': ox[7],
-    #     'ox11': ox[8],
-    #     'ox12': ox[9],
-    #     'ox13': ox[10],
-    #     'ox14': ox[11],
-    # }
-    # return render(request, 'vote/detail.html', ctx)
+    # return JsonResponse({"user": user, "winner": winner, "win_rate": round(win_rate*100, 1), "win_dic": win_dic, "ox_list": ox})
