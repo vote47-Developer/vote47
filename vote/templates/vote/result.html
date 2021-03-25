@@ -8,10 +8,23 @@
     </head>
     <body>
         {%if winner == '기호 2번 오세훈'%}
-        <img src="http://info.nec.go.kr/photo_20210407/Gsg1100/Hb100138272/gicho/100138272.JPG" alt="" width="300px" />
+            <div class="candidate">
+                <img src="http://info.nec.go.kr/photo_20210407/Gsg1100/Hb100138272/gicho/100138272.JPG" alt="" width="300px" />
+                <div>기호 2번 오세훈 후보</div>
+            </div>
         {%else%}
-        <img src="http://info.nec.go.kr/photo_20210407/Gsg1100/Hb100138295/gicho/100138295.JPG" alt="" width="300px" />
+            <div class="candidate">
+                <img src="http://info.nec.go.kr/photo_20210407/Gsg1100/Hb100138295/gicho/100138295.JPG" alt="" width="300px" />
+                <div>기호 1번 박영선 후보</div>
+            </div>
         {%endif%}
+
+        <div>
+            <div>
+                {{winner}}후보와 정책 일치율
+            </div>
+        </div>
+        
         <p>{{user}}님과 생각이 가장 비슷한 후보자는 <b>{{winner}}</b>입니다.</p>
         <p>종합 예측 일치율은 {{win_rate}}% 입니다.</p>
         <p>후보자 개인 일치율은 {{win_personal}}% 입니다.</p>
