@@ -28,7 +28,7 @@ function ResultPage() {
 					<h1 class="title">Result 🥸</h1>
 					<div class="result-container"></div>
 					<div> Hello World! </div>
-					<button class="restart-btn">RESTART</button>` +this.information +`
+					<button class="restart-btn">RESTART</button>
 				</div>
       </div>
     `
