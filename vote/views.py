@@ -82,9 +82,13 @@ def candidate(request):
     user = User.objects.get(id=request.user.id)
     enrollment = Enrollment.objects.filter(user=user)
     response_list = []
+    idx = 0
     for i in enrollment:
+        if(idx == 15):
+            break
         print('i : ', i)
         response_list.append(i.example.num)
+        idx += 1
 
     print('user', user)
     print('enrollment', enrollment)
