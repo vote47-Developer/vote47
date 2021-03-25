@@ -4,8 +4,8 @@ function Result(props) {
 			this[key] = props[key]
 		}
 
-		this.setData()
-		this.setElements()
+		// this.setData()
+		// this.setElements()
 	}
 
 	this.setData = () => {

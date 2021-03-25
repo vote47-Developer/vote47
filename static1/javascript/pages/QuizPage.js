@@ -61,7 +61,7 @@ function QuizPage() {
 			if (nextQuiz) {
 				this.setCurrentQuiz(nextQuiz)
 			} else {
-				router.route('result')
+				router.route('candidate')
 			}
 		}, 800)
 	}
