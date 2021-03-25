@@ -86,6 +86,15 @@ def save_answer(request):
     return render(request, "vote/user_info.html")
 
 
+@csrf_exempt
+def modal_background(request):
+    red = json.loads(request.body)
+    quiz_id = req["quizId"]
+    quiz = Quiz.objects.get(num=quiz_id)
+    print(quiz.background)
+    return JsonResponse({"background": quiz.background})
+
+
 def candidate(request):
     user = User.objects.get(id=request.user.id)
     enrollment = Enrollment.objects.filter(user=user)

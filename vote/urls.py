@@ -13,4 +13,5 @@ urlpatterns = [
     path('answer', views.save_answer, name='save_answer'),
     path('api/get/quiz-list', views.get_quiz_list, name='get_quiz_list'),
     path("", views.user_info, name="user_info"),
+    path("modal_background", views.modal_background, name="modal_background"),
 ]
