@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>result</title>
+    </head>
+    <body>
+        {%if winner == '기호 2번 오세훈'%}
+        <img src="http://info.nec.go.kr/photo_20210407/Gsg1100/Hb100138272/gicho/100138272.JPG" alt="" width="300px" />
+        {%else%}
+        <img src="http://info.nec.go.kr/photo_20210407/Gsg1100/Hb100138295/gicho/100138295.JPG" alt="" width="300px" />
+        {%endif%}
+        <p>{{user}}님과 생각이 가장 비슷한 후보자는 <b>{{winner}}</b>입니다.</p>
+        <p>종합 예측 일치율은 {{win_rate}}% 입니다.</p>
+        <p>후보자 개인 일치율은 {{win_personal}}% 입니다.</p>
+        <p>부동산 공약 일치율은 {{win_real_estate}}% 입니다.</p>
+        <p>경제 공약 일치율은 {{win_economy}}% 입니다.</p>
+        <p>복지 공약 일치율은 {{win_welfare}}% 입니다.</p>
+        <p>청년 공약 일치율은 {{win_youngs}}% 입니다.</p>
+        <p>사회적 가치 공약 일치율은 {{win_social_value}}% 입니다.</p>
+        <p><a href="{%url 'vote:detail'%}">자세히 보기</a></p>
+    </body>
+</html>

@@ -10,7 +10,7 @@
 #quiz-page .quiz {
   height: 80vh;
   width: 90vw;
-  transition: 0.5s ease-out;
+  transition: 0.1s ease-out;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,7 +32,7 @@
 }
 
 #quiz-page .example {
-  transition: 0.5s ease-out;
+  transition: 0.2s ease-out;
   display: flex;
   align-items: center;
   justify-content: center;

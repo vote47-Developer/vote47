@@ -11,6 +11,7 @@ from .forms import UserForm
 from .models import User, Candidate, Enrollment
 from django.views.decorators.csrf import csrf_exempt
 import json
+from .calculate_util import *
 
 
 def home(request):
@@ -86,3 +87,92 @@ def save_answer(request):
     # todo 현재 로그인 중인 유저의 정보를 가져오기
     # user = User.objects.all()
     return render(request, "vote/user_info.html")
+
+
+def candidate(request):
+    user = User.objects.get(id=request.user.id)
+    enrollment = Enrollment.objects.filter(user=user)
+    response_list = []
+    for i in enrollment:
+        response_list.append(i.example)
+        
+    calculation = calculate(response_list=response_list)
+    score_sum = calculation[-1]
+    score_percentage = calculation[0]
+    if score_sum[0] > score_sum[1]:
+        winner = '기호 1번 박영선'
+        win_rate = score_sum[0]
+        win_cat = score_percentage[0]
+    else:
+        winner = '기호 2번 오세훈'
+        win_rate = score_sum[1]
+        win_cat = score_percentage[1]
+
+    ctx = {
+        'user': user,
+        'winner': winner,  # 후보자
+        'win_rate': round(win_rate*100, 1),  # 예측 종합 일치율
+        'win_personal': win_cat[0],
+        'win_real_estate': win_cat[1],
+        'win_economy': win_cat[2],
+        'win_welfare': win_cat[3],
+        'win_youngs': win_cat[4],
+        'win_social_value': win_cat[5],
+    }
+    return render(request, 'vote/result.html', ctx)
+
+
+def detail(request):
+    user = User.objects.get(id=request.user.id)
+    enrollment = Enrollment.objects.all()
+
+    response_list = []
+    for i in enrollment:
+        response_list.append(i.example)
+         
+    calculation = calculate(response_list=response_list)
+    score_sum = calculation[-1]
+    score_percentage = calculation[0]
+    if score_sum[0] > score_sum[1]:
+        winner = '기호 1번 박영선'
+        answer_list = [[1], [3, 4], [2], [1, 3], [1],
+                       [2], [1], [2], [2], [1], [2], [1], [0], [2]]
+        win_rate = score_sum[0]
+        win_cat = score_percentage[0]
+    else:
+        winner = '기호 2번 오세훈'
+        answer_list = [[2], [1, 2, 3, 4], [1], [1, 2], [2],
+                       [1], [3], [1], [1], [2], [1], [2], [2], [1]]
+        win_rate = score_sum[1]
+        win_cat = score_percentage[1]
+    ox = []
+    for i in range(2, 14):
+        if response_list[i] in answer_list[i]:
+            ox.append('o')
+        else:
+            ox.append('x')
+    print(ox)
+    ctx = {
+        'user': user,
+        'winner': winner,  # 후보자
+        'win_rate': round(win_rate*100, 1),  # 예측 종합 일치율
+        'win_personal': win_cat[0],
+        'win_real_estate': win_cat[1],
+        'win_economy': win_cat[2],
+        'win_welfare': win_cat[3],
+        'win_youngs': win_cat[4],
+        'win_social_value': win_cat[5],
+        'ox3': ox[0],
+        'ox4': ox[1],
+        'ox5': ox[2],
+        'ox6': ox[3],
+        'ox7': ox[4],
+        'ox8': ox[5],
+        'ox9': ox[6],
+        'ox10': ox[7],
+        'ox11': ox[8],
+        'ox12': ox[9],
+        'ox13': ox[10],
+        'ox14': ox[11],
+    }
+    return render(request, 'vote/detail.html', ctx)
