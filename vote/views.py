@@ -43,6 +43,7 @@ def user_info(request):
     if request.method == "POST":
         form = UserForm(request.POST)
         if form.is_valid():
+            # 추가사항
             if((form.cleaned_data.get("nickname") == None) or (form.cleaned_data.get("age") == None) or (form.cleaned_data.get("job") == None)):
                 ctx = {
                     "form": form,
