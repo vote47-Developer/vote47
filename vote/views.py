@@ -66,6 +66,7 @@ def user_info(request):
             return render(request, "vote/user_info.html", ctx)
     if request.method == "GET":
         form = UserForm()
+        print('폼입니다',form)
         ctx = {
             "form": form,
         }
@@ -107,13 +108,17 @@ def candidate(request):
     score_sum = calculation[-1]
     score_percentage = calculation[0]
     if score_sum[0] > score_sum[1]:
-        winner = '기호 1번 박영선'
+        winner = '기호 1번 더불어민주당 박영선'
         win_rate = score_sum[0]
         win_cat = score_percentage[0]
+        main_color = '#004EA1'
+        sub_color = '#00A0E2'
     else:
-        winner = '기호 2번 오세훈'
+        winner = '기호 2번 국민의 힘 오세훈'
         win_rate = score_sum[1]
         win_cat = score_percentage[1]
+        main_color = '#E61E2B'
+        sub_color = '#F18170'
 
     # win_list = [win_cat[0], win_cat[1], win_cat[2],
     #             win_cat[3], win_cat[4], win_cat[5]]
@@ -126,12 +131,15 @@ def candidate(request):
         'user': user,
         'winner': winner,  # 후보자
         'win_rate': round(win_rate*100, 1),  # 예측 종합 일치율
+        'win_rate_over': float(round(win_rate*100, 1)+4),  # 예측 종합 일치율
         'win_personal': win_cat[0],
         'win_real_estate': win_cat[1],
         'win_economy': win_cat[2],
         'win_welfare': win_cat[3],
         'win_youngs': win_cat[4],
         'win_social_value': win_cat[5],
+        'main_color' :main_color,
+        'sub_color' :sub_color,
     }
     return render(request, 'vote/result.html', ctx)
 
@@ -172,6 +180,7 @@ def detail(request):
         'user': user,
         'winner': winner,  # 후보자
         'win_rate': round(win_rate*100, 1),  # 예측 종합 일치율
+        'win_rate_over': int(round(win_rate*100, 1)+5),  # 예측 종합 일치율
         'win_personal': win_cat[0],
         'win_real_estate': win_cat[1],
         'win_economy': win_cat[2],

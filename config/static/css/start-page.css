@@ -14,6 +14,17 @@
     color: #444;
     margin-bottom: 36px;
 }
+#start-page i {
+    color: #9956f6;
+}
+#start-page p {
+    font-size: small;
+    margin-bottom: 1rem;
+}
+#start-page .info {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
 
 #start-page .start-btn {
     display: flex;
@@ -32,4 +43,5 @@
 
 #start-page .start-btn:hover {
     background-color: #9956f6;
+    color: white;
 }

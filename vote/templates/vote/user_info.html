@@ -1,19 +1,30 @@
-{% extends 'vote/base.html' %} {% load static %} {% block styleSignup %}
+{% extends 'vote/base.html' %} 
+{% load static %} 
+{% block styleSignup %}
 <link rel="stylesheet" href="{% static 'css/global.css' %}" />
 <link rel="stylesheet" href="{% static 'css/nav.css' %}" />
 <link rel="stylesheet" href="{% static 'css/sign-up.css' %}" />
-{% endblock %} {% block signup %}
+{% endblock %} 
+{% block signup %}
 <div>
     <div id="login-page">
         <div class="inner-container">
             <div class='headers'>
-                <h1 class="title">Welcome to Vote47</h1>
-                <h3>내 생각과 가장 잘 맞는 서울시장 후보 테스트</h3>
+                <br>
+                <h1 class="title"><i class="fas fa-vote-yea" style='color:#9956f6'></i>Welcome to Vote47</h1>
+                <h3>나와 가장 잘 맞는 서울시장 후보 테스트</h3>
             </div>
             <div class='login-intro'>
-                <p><i class="fas fa-exclamation"></i>  테스트는 총 15문제이고, 약 7분가량 걸려요.</p>
-                <p><i class="fas fa-exclamation"></i>  테스트를 위해 유권자님의 정보를 알려주세요!</p>
-                <p><i class="fas fa-exclamation"></i>  지금 입력하는 정보는 결과에 영향을 미치지 않아요.</p>
+                <p>안녕하세요!</p> 
+                <p>4월 7일 재보궐선거에서 개인별 맞춤 후보자를 추천하는 테스트를 제작한 Vote47팀입니다. <br>
+                    소속 정당이나 이념등의 정치적인 요소는 최대한 배제하고, <br>
+                    오직 후보자와 공약만을 고려해서 테스트를 제작했습니다. <br> 
+                    이 테스트가 여러분들의 선택에 도움이 되기를 바라겠습니다! <br>
+                </p>
+                <p>   그럼 테스트를 시작해볼까요?</p>
+                <br>
+                <p><i class="fas fa-question"></i>  테스트를 위해 유권자님의 정보를 알려주세요!</p>
+                <p><i class="fas fa-question"></i>  지금 입력하는 정보는 결과에 영향을 미치지 않아요.</p>
             </div>
             <div class="login-container">
                 <form action="" method="POST" class="container">
