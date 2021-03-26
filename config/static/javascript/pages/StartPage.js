@@ -6,6 +6,7 @@ function StartPage() {
 
 	this.setElements = () => {
 		this.template = /*html*/ `
+        {%load static%}
       <div id="start-page">
         <h1 class="title"><i class="fas fa-vote-yea" style='color:#9956f6'></i> Welcome To Vote47</h1>
         <div class='info'>
