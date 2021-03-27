@@ -1,0 +1,118 @@
+{% extends 'vote/base.html' %} {% load static %} {% block styleSignup %}
+<link rel="stylesheet" href="{% static 'css/global.css' %}" />
+<link rel="stylesheet" href="{% static 'css/nav.css' %}" />
+<link rel="stylesheet" href="{% static 'css/sign-up.css' %}" />
+{% endblock %} {% block signup %}
+<div>
+    <div id="login-page">
+        <div class="inner-container">
+            <p style="margin-top: 10px; margin-bottom: 10px"><b>{{user}}</b>님에게 가장 적합한 후보는</p>
+            {%if winner == '기호 2번 국민의 힘 오세훈'%}
+            <img
+                src="http://info.nec.go.kr/photo_20210407/Gsg1100/Hb100138272/gicho/100138272.JPG"
+                alt=""
+                width="250px"
+            />
+            {%else%}
+            <img
+                src="http://info.nec.go.kr/photo_20210407/Gsg1100/Hb100138295/gicho/100138295.JPG"
+                alt=""
+                width="250px"
+            />
+            {%endif%}
+            <p><b class="name" style="color:{{main_color}}">{{winner}}</b>입니다.</p>
+            <br />
+            <div class="total-percentage">
+                <p style="margin-bottom: 10px">종합 예상 일치율</p>
+
+                <div
+                    class="pie-chart2"
+                    style="background: conic-gradient({{main_color}} 0% {{win_rate}}%, {{sub_color}} {{win_rate_over}}% 100%);"
+                >
+                    <span class="center"><p>{{win_rate}}%</p></span>
+                </div>
+            </div>
+            <div class="graphbox">
+                <p style="margin-top: 30px; margin-bottom: 10px; text-align: center">카테고리별 예상 지지도</p>
+                <ul class="graph">
+                    <li>
+                        <div style="background-color: {{sub_color}}">
+                            <span style="background-color:{{main_color}}; height:{{win_personal}}%"></span>
+                        </div>
+                        <p class="final-data">{{win_personal}}%</p>
+                        <p class="final-data">
+                            후보자 <br />
+                            개인
+                        </p>
+                    </li>
+                    <li>
+                        <div style="background-color: {{sub_color}}">
+                            <span style="background-color:{{main_color}}; height:{{win_real_estate}}%"></span>
+                        </div>
+                        <p>{{win_real_estate}}%</p>
+                        <p>
+                            부동산 <br />
+                            정책
+                        </p>
+                    </li>
+                    <li>
+                        <div style="background-color: {{sub_color}}">
+                            <span style="background-color:{{main_color}}; height:{{win_economy}}%"></span>
+                        </div>
+                        <p>{{win_economy}}%</p>
+                        <p>
+                            경제 <br />
+                            정책
+                        </p>
+                    </li>
+                    <li>
+                        <div style="background-color: {{sub_color}}">
+                            <span style="background-color:{{main_color}}; height:{{win_welfare}}%"></span>
+                        </div>
+                        <p>{{win_welfare}}%</p>
+                        <p>
+                            복지 <br />
+                            정책
+                        </p>
+                    </li>
+                    <li>
+                        <div style="background-color: {{sub_color}}">
+                            <span style="background-color:{{main_color}}; height:{{win_youngs}}%"></span>
+                        </div>
+                        <p>{{win_youngs}}%</p>
+                        <p>
+                            청년 <br />
+                            정책
+                        </p>
+                    </li>
+                    <li>
+                        <div style="background-color: {{sub_color}}">
+                            <span style="background-color:{{main_color}}; height:{{win_social_value}}%"></span>
+                        </div>
+                        <p>{{win_social_value}}%</p>
+                        <p>
+                            사회적 <br />
+                            가치
+                        </p>
+                    </li>
+                </ul>
+            </div>
+            <div class="seemore">
+                <p>
+                    <a href="http://policy.nec.go.kr/"
+                        ><button style="color:{{main_color}};    border: 2px solid {{sub_color}};">
+                            공약 전체 보기
+                        </button></a
+                    >
+                </p>
+                <p>
+                    <a href="{%url 'vote:user_info'%}"
+                        ><button style="color:{{main_color}};    border: 2px solid {{sub_color}};">다시하기</button></a
+                    >
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<script></script>
+{% endblock %}

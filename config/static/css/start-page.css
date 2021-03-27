@@ -1,0 +1,47 @@
+#start-page {
+    min-height: calc(100vh - 60px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 60px;
+}
+
+#start-page .title {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.36px;
+    color: #444;
+    margin-bottom: 36px;
+}
+#start-page i {
+    color: #9956f6;
+}
+#start-page p {
+    font-size: small;
+    margin-bottom: 1rem;
+}
+#start-page .info {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#start-page .start-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 48px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #9956f6;
+    background-color: white;
+    box-shadow: 0px 1px 16px rgba(0, 0, 0, 0.12);
+    user-select: none;
+}
+
+#start-page .start-btn:hover {
+    background-color: #9956f6;
+    color: white;
+}

@@ -16,8 +16,8 @@ POINT_SET = [
     {
         # Question 3
         'category': [1],
-        'points': [[1, 0, 0, 0, 0],
-                   [0, 1, 0, 0, 0]]
+        'points': [[0, 1, 0, 0, 0],
+                   [1, 0, 0, 0, 0]]
     },
     {
         # Question 4
@@ -31,14 +31,9 @@ POINT_SET = [
         'points': [[1, 0, 0, 0, 0],
                    [0, 1, 0, 0, 0]]
     },
+
     {
-        # Question 6
-        'category': [1],
-        'points': [[1, 0, 0, 0, 0],
-                   [0, 1, 0, 0, 0]]
-    },
-    {
-        # Question
+        # Question 7
         'category': [1],
         'points': [[0, 1, 0, 0, 0],
                    [1, 0, 0, 0, 0]]
@@ -61,12 +56,7 @@ POINT_SET = [
         'points': [[0, 1, 0, 0, 0],
                    [1, 0, 0, 0, 0]]
     },
-    {
-        # Question 11
-        'category': [3, 5],
-        'points': [[1, 0, 0, 0, 0],
-                   [0, 1, 0, 0, 0]]
-    },
+
     {
         # Question 12
         'category': [4, 5],
@@ -85,12 +75,7 @@ POINT_SET = [
         'points': [[1, 0, 0, 0, 0],
                    [0, 1, 0, 0, 0]]
     },
-    {
-        # Question 15
-        'category': [2, 4],
-        'points': [[0, 1, 0, 0, 0],
-                   [1, 0, 0, 0, 0]]
-    },
+
     {
         # Question 16
         'category': [4, 5],
@@ -100,8 +85,8 @@ POINT_SET = [
     {
         # Question 17
         'category': [3, 5],
-        'points': [[1, 0, 0, 0, 0],
-                   [0, 1, 0, 0, 0]]
+        'points': [[0, 1, 0, 0, 0],
+                   [1, 0, 0, 0, 0]]
     },
     {
         # Category
@@ -116,30 +101,40 @@ CATEGORY_NUM = 6
 
 
 def calculate(response_list):
-    category_list = set_category_weight(response_list[-1])
+    category_list = set_category_weight(response_list[-1])[0]
+    full_score = set_category_weight(response_list[-1])[1]
     score_set = get_score(response_list)
     score_weight = apply_weight(score_set, category_list)
     score_sum = sum_score(score_weight)
-    return score_set, score_weight, score_sum
+    score_percentage = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]]
+    for cand in range(2):
+        for i in range(CATEGORY_NUM):
+            score_percentage[cand][i] = round(
+                score_weight[i][cand]/full_score[i]*100)
+    print(score_percentage)
+    return score_percentage, score_set, score_weight, score_sum
 
 
 def set_category_weight(target):  # target은 맨 마지막 문제에서 고르는 선택지
-    num_q = [2, 5, 5, 6, 6, 5]
+    num_q = [2, 4, 4, 5, 5, 4]
     if POINT_SET[-1]['category'] == [-1]:
         category_list = POINT_SET[-1]['points'].copy()
         total_weight = 0
         for i in range(CATEGORY_NUM):
             total_weight += category_list[i]
-        total_weight -= category_list[target]
+        total_weight -= category_list[target-1]
+        print(total_weight, category_list[target-1])
+        print(type(category_list[target-1]))
         for i in range(CATEGORY_NUM):
             category_list[i] = category_list[i]*(0.65/(total_weight*num_q[i]))
-        category_list[target] = 0.35/num_q[target]
-        print('가중치')
-        print(category_list)
-
+        category_list[target-1] = 0.35/num_q[target-1]
+        full_score = []
+        for i in range(CATEGORY_NUM):
+            full_score.append(num_q[i]*category_list[i])
+        # print(f'만점 {full_score}')
     else:
-        print('Category wight error detected')
-    return category_list
+        print('Category weight error detected')
+    return category_list, full_score
 
 
 def get_score(response_list):
@@ -152,7 +147,6 @@ def get_score(response_list):
             for cand in range(2):
                 output[POINT_SET[index]['category'][cat]][cand] = output[POINT_SET[index]['category'][cat]][cand] +\
                     POINT_SET[index]['points'][cand][response - 1]
-        # 여기서 149번쨰 줄에 \는 왜 들어간거지? +라는 문자를 살리고 싶어서?
     # print(output) #카테고리별 얻은 점수
     return output
 
@@ -162,6 +156,7 @@ def apply_weight(score_set, category_list):  # score_set은 응답을 모아놓�
     score_copy = score_set.copy()
     for i in range(len(score_copy)):
         score_copy[i] = [s*category_weight[i] for s in score_copy[i]]
+    # print(f'영역별 점수 {score_copy}')
     return score_copy  # 가중치를 곱한 응답의 리스트
 
 
@@ -175,6 +170,5 @@ def sum_score(score_sum):
 
 
 if __name__ == "__main__":
-    response_list = [2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, ]
     result = calculate(response_list)
     print(result)  # OUTPUT : 가중치 곱하기 전 카테고리 별 점수 획득, 가중치 곱한 후 카테고리 별 점수 획득
