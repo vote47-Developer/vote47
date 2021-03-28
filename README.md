@@ -1,11 +1,10 @@
 <h1> vote47 </h1>
 
-#developers
-
+#developers <br>
 junankim18 <br>
 ingong <br>
 hailsong <br>
 charmull <br>
 
-#researcher
+#researcher <br>
 이윤기
